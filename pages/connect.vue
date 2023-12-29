@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {BigNumberInBase, Status, StatusType} from "@injectivelabs/utils";
-import {useCounterStore} from "@/store/counter";
+import { BigNumberInBase, Status, StatusType } from "@injectivelabs/utils";
+import { useCounterStore } from "@/store/counter";
 
 const counterStore = useCounterStore();
 const status = reactive(new Status(StatusType.Idle));
@@ -11,21 +11,21 @@ onMounted(() => {
 });
 
 watch(
-    () => counterStore.count,
-    () => {
-      number.value = counterStore.count.toString();
-    }
+  () => counterStore.count,
+  () => {
+    number.value = counterStore.count.toString();
+  }
 );
 
 function handleIncrementCount() {
   status.setLoading();
 
   counterStore
-      .incrementCount()
-      .catch(alert)
-      .finally(() => {
-        status.setIdle();
-      });
+    .incrementCount()
+    .catch(alert)
+    .finally(() => {
+      status.setIdle();
+    });
 }
 
 function handleSetCount() {
@@ -42,11 +42,11 @@ function handleSetCount() {
   status.setLoading();
 
   counterStore
-      .setCount(numberInBn.toFixed(0))
-      .catch(alert)
-      .finally(() => {
-        status.setIdle();
-      });
+    .setCount(numberInBn.toFixed(0))
+    .catch(alert)
+    .finally(() => {
+      status.setIdle();
+    });
 }
 </script>
 
@@ -54,7 +54,7 @@ function handleSetCount() {
   <div class="bg-white">
     <Container class="py-2 flex justify-between items-center">
       <h1>Counter Example</h1>
-      <ConnectWallet/>
+      <ConnectWallet />
     </Container>
   </div>
   <Container class="grid place-items-center py-20">
@@ -66,37 +66,25 @@ function handleSetCount() {
         </h3>
       </div>
       <div class="py-2">
-        <Button
-            :disabled="status.isLoading()"
-            @click="handleIncrementCount"
-            class="w-full"
-        >
+        <Button :disabled="status.isLoading()" @click="handleIncrementCount" class="w-full">
           +
         </Button>
       </div>
       <div class="flex gap-2">
-        <input
-            v-model="number"
-            type="number"
-            step="1"
-            class="border rounded-lg p-2"
-        />
+        <input v-model="number" type="number" step="1" class="border rounded-lg p-2" />
         <Button @click="handleSetCount" :disabled="status.isLoading()">
           Set Count
         </Button>
       </div>
       <div class="flex justify-center py-5">
-        <a
-            class="text-blue-500 underline text-center"
-            target="_blank"
-            referrerpolicy="no-referrer"
-            href="https://testnet.explorer.injective.network/contract/inj1t8rhq5vcxqgw68ldg0k2mjxjvzshuah6tnugvy/"
-        >
+        <a class="text-blue-500 underline text-center" target="_blank" referrerpolicy="no-referrer"
+          href="https://testnet.explorer.injective.network/contract/inj1t8rhq5vcxqgw68ldg0k2mjxjvzshuah6tnugvy/">
           View Contract on Explorer
         </a>
       </div>
       <div
-          class="fixed inset-0 z-50 h-full w-full duration-300 ease-in backdrop-filter backdrop-blur bg-gray-900 bg-opacity-90 max-sm:z-40 hidden modal-container overflow-y-hidden  mx-auto sm:rounded-lg  max-sm:h-full max-sm:max-w-full max-sm:w-full md:min-w-lg md:max-w-lg lg:max-w-2xl max-h-screen sm:max-h-[90vh] overflow-y-auto"></div>
+        class="fixed inset-0 z-50 h-full w-full duration-300 ease-in backdrop-filter backdrop-blur bg-gray-900 bg-opacity-90 max-sm:z-40 hidden modal-container overflow-y-hidden  mx-auto sm:rounded-lg  max-sm:h-full max-sm:max-w-full max-sm:w-full md:min-w-lg md:max-w-lg lg:max-w-2xl max-h-screen sm:max-h-[90vh] overflow-y-auto">
+      </div>
     </Card>
   </Container>
 </template>

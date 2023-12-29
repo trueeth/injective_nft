@@ -100,20 +100,20 @@ export const CHAIN_ID: ChainId = (
   env.VITE_CHAIN_ID
     ? env.VITE_CHAIN_ID
     : IS_TESTNET
-    ? ChainId.Testnet
-    : IS_DEVNET
-    ? ChainId.Devnet
-    : ChainId.Mainnet
+      ? ChainId.Testnet
+      : IS_DEVNET
+        ? ChainId.Devnet
+        : ChainId.Mainnet
 ) as ChainId
 
 export const ETHEREUM_CHAIN_ID: EthereumChainId = env.VITE_ETHEREUM_CHAIN_ID
   ? parseInt(env.VITE_ETHEREUM_CHAIN_ID.toString())
   : parseInt(
-      (IS_TESTNET || IS_DEVNET
-        ? EthereumChainId.Goerli
-        : EthereumChainId.Mainnet
-      ).toString()
-    )
+    (IS_TESTNET || IS_DEVNET
+      ? EthereumChainId.Goerli
+      : EthereumChainId.Mainnet
+    ).toString()
+  )
 
 const endpoints = getNetworkEndpoints(NETWORK)
 
@@ -137,8 +137,8 @@ const CAMPAIGN_ENDPOINT =
   IS_MAINNET && !IS_STAGING
     ? 'https://k8s.mainnet.campaigns.grpc-web.injective.network'
     : IS_TESTNET
-    ? 'https://k8s.testnet.campaigns.grpc-web.injective.network'
-    : endpoints.indexer
+      ? 'https://k8s.testnet.campaigns.grpc-web.injective.network'
+      : endpoints.indexer
 
 export const ENDPOINTS = {
   ...endpoints,

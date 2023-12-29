@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { toDataURL } from 'qrcode'
-import {Modal} from "~/types";
+import { Modal } from "~/types";
 
 const modalStore = useModalStore()
 const walletStore = useWalletStore()

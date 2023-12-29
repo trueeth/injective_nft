@@ -1,11 +1,14 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
+  // https://v3.nuxtjs.org/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "strict": true,
-    "module": "esnext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "verbatimModuleSyntax": false,
+    "noImplicitReturns": false,
+    "strictNullChecks": false,
     "types": [
       "@vueuse/nuxt",
       "@pinia/nuxt",
@@ -16,4 +19,11 @@
     "dist",
     ".output"
   ],
+  "ts-node": {
+    // these options are overrides used only by ts-node
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true
+    }
+  },
 }

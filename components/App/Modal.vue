@@ -60,38 +60,23 @@ watchDebounced(
 <template>
   <BaseModalWrapper
     class="relative mx-auto sm:rounded-lg bg-gray-850 max-sm:h-full max-sm:max-w-full max-sm:w-full text-white"
-    :class="classes"
-    wrapper-class="backdrop-filter backdrop-blur bg-gray-900 bg-opacity-90 max-sm:z-40"
-    v-bind="$attrs"
-    @modal:closed="onModalClose"
-  >
+    :class="classes" wrapper-class="backdrop-filter backdrop-blur bg-gray-900 bg-opacity-90 max-sm:z-40" v-bind="$attrs"
+    @modal:closed="onModalClose">
     <template #default="{ close, isLoading }">
-      <div
-        :class="{
-          'min-h-[320px] flex flex-col': isLoading
-        }"
-      >
-        <div
-          class="flex items-center justify-between"
-          :class="{ 'mb-6 px-6 pt-6': !isDense }"
-        >
+      <div :class="{
+        'min-h-[320px] flex flex-col': isLoading
+      }">
+        <div class="flex items-center justify-between" :class="{ 'mb-6 px-6 pt-6': !isDense }">
           <div class="text-sm uppercase text-gray-100 font-semibold flex-grow">
             <slot name="title" />
           </div>
 
           <div v-if="!isHideCloseButton">
-            <BaseIcon
-              name="close"
-              class="ml-auto h-5 w-5 min-w-5 text-gray-200 hover:text-blue-500"
-              @click="close"
-            />
+            <BaseIcon name="close" class="ml-auto h-5 w-5 min-w-5 text-gray-200 hover:text-blue-500" @click="close" />
           </div>
         </div>
 
-        <div
-          v-if="isLoading"
-          class="grow flex items-center justify-center -mt-6"
-        >
+        <div v-if="isLoading" class="grow flex items-center justify-center -mt-6">
           <AppSpinner lg />
         </div>
         <div v-else :class="modalContentClass">

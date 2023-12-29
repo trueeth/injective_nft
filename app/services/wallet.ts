@@ -1,10 +1,9 @@
-import {Wallet, WalletStrategy} from "@injectivelabs/wallet-ts";
-import {ErrorType, UnspecifiedErrorCode, WalletException, Web3Exception} from "@injectivelabs/exceptions";
+import { Wallet, WalletStrategy } from "@injectivelabs/wallet-ts";
+import { ErrorType, UnspecifiedErrorCode, WalletException, Web3Exception } from "@injectivelabs/exceptions";
 import {
   CHAIN_ID,
   ETHEREUM_CHAIN_ID,
   alchemyRpcEndpoint,
-  alchemyWsRpcEndpoint,
 } from "@/app/utils/constants";
 
 export const walletStrategy = new WalletStrategy({
@@ -17,8 +16,8 @@ export const walletStrategy = new WalletStrategy({
 
 
 export const connect = ({
-                          wallet
-                        }: {
+  wallet
+}: {
   wallet: Wallet
   // onAccountChangeCallback?: (account: string) => void,
 }) => {
@@ -30,21 +29,21 @@ export const getAddresses = async (): Promise<string[]> => {
 
   if (addresses.length === 0) {
     throw new WalletException(
-        new Error('There are no addresses linked in this wallet.'),
-        {
-          code: UnspecifiedErrorCode,
-          type: ErrorType.WalletError
-        }
+      new Error('There are no addresses linked in this wallet.'),
+      {
+        code: UnspecifiedErrorCode,
+        type: ErrorType.WalletError
+      }
     )
   }
 
   if (!addresses.every((address) => !!address)) {
     throw new WalletException(
-        new Error('There are no addresses linked in this wallet.'),
-        {
-          code: UnspecifiedErrorCode,
-          type: ErrorType.WalletError
-        }
+      new Error('There are no addresses linked in this wallet.'),
+      {
+        code: UnspecifiedErrorCode,
+        type: ErrorType.WalletError
+      }
     )
   }
 

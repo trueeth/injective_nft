@@ -30,13 +30,10 @@ const sizeClasses = computed(() => {
 </script>
 
 <template>
-  <BaseSpinner
-    class="m-0"
-    :class="[
-      sizeClasses,
-      isWhite
-        ? 'border-t-gray-200 border-r-gray-200'
-        : 'border-t-blue-500 border-r-blue-500'
-    ]"
-  />
+  <BaseSpinner class="m-0" :class="[
+    sizeClasses,
+    isWhite
+      ? 'border-t-gray-200 border-r-gray-200'
+      : 'border-t-blue-500 border-r-blue-500'
+  ]" />
 </template>

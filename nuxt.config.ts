@@ -1,46 +1,61 @@
-import nitroConfigHook from "./nuxt-config/hooks/nitro";
-import viteConfig from "./nuxt-config/vite";
+import head from './nuxt-config/head'
+import hooks from './nuxt-config/hooks'
+import vite, { vitePlugins } from './nuxt-config/vite'
+
+const isProduction = process.env.NODE_ENV === 'production'
 
 export default defineNuxtConfig({
+    vite,
+    hooks,
     ssr: false,
-    builder:'vite',
+    builder: 'vite',
+    debug: !isProduction,
+    css: ['@/assets/css/tailwind.css'],
+
+    app: {
+        head
+    },
 
     typescript: {
         typeCheck: true
     },
 
-    css: ['@/assets/css/tailwind.css'],
+    imports: {
+        dirs: ['composables/**', 'store/*.ts', 'store/**/index.ts']
+    },
 
-    hooks: {
-        ...nitroConfigHook,
+    sourcemap: {
+        server: false,
+        client: true
+    },
+
+    plugins: [...vitePlugins],
+
+    pinia: {
+        autoImports: ['defineStore']
     },
 
     modules: [
         '@injectivelabs/ui-shared',
-        "@nuxtjs/tailwindcss",
-        "@pinia/nuxt",
-        "@vueuse/nuxt"
+        '@nuxtjs/tailwindcss',
+        '@pinia/nuxt',
+        '@vueuse/nuxt',
+        '@nuxt/devtools',
+        ...(process.env.VITE_BUGSNAG_KEY ? ['@injectivelabs/nuxt-bugsnag'] : [])
     ],
 
-
-    sourcemap: {
-        server: false,
-        client: true,
-    },
-
-    imports: {
-        dirs: ['composables/**', 'store/*.ts', 'store/**/index.ts'],
-    },
-
-    pinia: {
-        autoImports: ["defineStore"],
-    },
-
-    vite: viteConfig,
-
-    build: {
-        transpile: ['typescript-module-or-file'], // Add the TypeScript module or file that you want to transpile
-    },
-
-    plugins: [{src: "./nuxt-config/buffer.ts", ssr: false}],
-});
+    // @ts-ignore
+    bugsnag: process.env.VITE_BUGSNAG_KEY
+        ? {
+            disabled: false,
+            publishRelease: true,
+            baseUrl: process.env.VITE_BASE_URL,
+            config: {
+                releaseStage: process.env.VITE_ENV,
+                notifyReleaseStages: ['staging', 'mainnet'],
+                appVersion: process.env.npm_package_version,
+                apiKey: process.env.VITE_BUGSNAG_KEY
+            }
+        }
+        : undefined
+})

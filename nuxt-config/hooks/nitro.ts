@@ -1,4 +1,4 @@
-import { NitroConfig } from "nitropack";
+import type { NitroConfig } from "nitropack";
 
 const customStaticRoutes: string[] = ["/"];
 

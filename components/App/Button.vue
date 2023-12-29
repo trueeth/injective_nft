@@ -84,24 +84,16 @@ export default {
 </script>
 
 <template>
-  <button
-    :disabled="isDisabled"
-    type="button"
-    role="button"
-    :class="[
-      classes,
-      {
-        'border-transparent': hasBackground && !isDisabled,
-        ' border-gray-600 bg-transparent text-gray-600 cursor-not-allowed':
-          isDisabled,
-        'hover:bg-opacity-80 hover:text-opacity-80 hover:border-opacity-80':
-          !isDisabled
-      }
-    ]"
-    v-bind="filteredAttrs"
-    class="font-semibold rounded-md border box-border focus:outline-none"
-    @click="click"
-  >
+  <button :disabled="isDisabled" type="button" role="button" :class="[
+    classes,
+    {
+      'border-transparent': hasBackground && !isDisabled,
+      ' border-gray-600 bg-transparent text-gray-600 cursor-not-allowed':
+        isDisabled,
+      'hover:bg-opacity-80 hover:text-opacity-80 hover:border-opacity-80':
+        !isDisabled
+    }
+  ]" v-bind="filteredAttrs" class="font-semibold rounded-md border box-border focus:outline-none" @click="click">
     <slot v-if="(!status || status.isNotLoading()) && !isLoading" />
     <span v-else class="flex items-center justify-center">
       <AppSpinner v-bind="{ isSm: true, isWhite: !isDarkSpinner }" />

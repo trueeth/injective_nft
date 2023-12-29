@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import type {DropdownOptionWithToken} from "~/types";
+import type { DropdownOptionWithToken } from "~/types";
 
 const props = defineProps({
   isClearable: Boolean,
@@ -71,22 +71,15 @@ function handleClear() {
 </script>
 
 <template>
-  <BaseDropdown
-    class="w-full"
-    :disabled="isDisabled"
-    :delay="300"
-    auto-size="true"
-    auto-boundary-max-size
-    :popper-class="popperClass"
-  >
+  <BaseDropdown class="w-full" :disabled="isDisabled" :delay="300" auto-size="true" auto-boundary-max-size
+    :popper-class="popperClass">
     <template #default="{ isOpen }">
       <div
         class="flex items-center justify-between px-4 h-10 box-border bg-gray-1000 border rounded-lg cursor-pointer text-sm"
         :class="[
           selectedClass,
           isOpen ? 'border-blue-500' : 'border-transparent'
-        ]"
-      >
+        ]">
         <slot name="selected-option" :option="selectedItem">
           <div>
             <span v-if="selectedItem" class="text-white text-sm">
@@ -98,21 +91,13 @@ function handleClear() {
         </slot>
 
         <div v-if="!isDisabled" class="flex items-center gap-2">
-          <BaseIcon
-            v-if="isClearable && selectedItem"
-            name="close"
-            class="min-w-4 w-4 h-4 text-gray-500 hover:text-white"
-            @click.stop="handleClear"
-          />
+          <BaseIcon v-if="isClearable && selectedItem" name="close" class="min-w-4 w-4 h-4 text-gray-500 hover:text-white"
+            @click.stop="handleClear" />
 
-          <BaseIcon
-            name="caret-down-thick"
-            class="ease-in-out duration-300 min-w-3 w-3 h-3"
-            :class="{
-              'text-gray-500': !isOpen,
-              'text-blue-500 rotate-180': isOpen
-            }"
-          />
+          <BaseIcon name="caret-down-thick" class="ease-in-out duration-300 min-w-3 w-3 h-3" :class="{
+            'text-gray-500': !isOpen,
+            'text-blue-500 rotate-180': isOpen
+          }" />
         </div>
       </div>
     </template>
@@ -120,31 +105,18 @@ function handleClear() {
     <template #content="{ close }">
       <slot name="list">
         <div class="p-2 py-4 max-h-xs space-y-3" @click.stop>
-          <AppInput
-            v-if="isSearchable"
-            v-model="search"
-            class="text-white"
-            is-sm
-            is-bg-transparent
-            placeholder="Search"
-          />
+          <AppInput v-if="isSearchable" v-model="search" class="text-white" is-sm is-bg-transparent
+            placeholder="Search" />
 
           <div>
-            <AppSelectFieldItem
-              v-for="item in filteredList"
-              :key="`${uuid}-${item}`"
-              v-model="value"
-              :value="item.value"
-              @update:modelValue="close"
-            >
+            <AppSelectFieldItem v-for="item in filteredList" :key="`${uuid}-${item}`" v-model="value" :value="item.value"
+              @update:modelValue="close">
               <template #default="{ isActive }">
                 <slot name="option" :option="item" :is-active="isActive">
-                  <div
-                    :class="{
-                      'text-white': !isActive,
-                      'text-blue-500 group-hover:text-white': isActive
-                    }"
-                  >
+                  <div :class="{
+                    'text-white': !isActive,
+                    'text-blue-500 group-hover:text-white': isActive
+                  }">
                     <span>
                       {{ item.display }}
                     </span>

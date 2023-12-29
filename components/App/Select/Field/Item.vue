@@ -23,10 +23,7 @@ function click() {
 </script>
 
 <template>
-  <div
-    class="p-2 hover:bg-blue-500 rounded text-white text-sm font-semibold cursor-pointer group"
-    @click="click"
-  >
+  <div class="p-2 hover:bg-blue-500 rounded text-white text-sm font-semibold cursor-pointer group" @click="click">
     <slot :is-active="isActive" />
   </div>
 </template>

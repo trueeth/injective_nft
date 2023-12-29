@@ -1,35 +1,41 @@
-import {defineConfig, UserConfig} from "vite";
-import {nodePolyfills} from "@bangjelkoski/vite-plugin-node-polyfills";
-import AutoImport from "unplugin-auto-import/vite"
+import { defineConfig } from 'vite'
+import { ViteConfig } from 'nuxt/schema'
+import tsconfigPaths from 'vite-tsconfig-paths'
+import { nodePolyfills } from '@bangjelkoski/vite-plugin-node-polyfills'
+
+const buildSourceMap = process.env.BUILD_SOURCEMAP !== 'false'
 
 export default defineConfig({
     define: {
-        "process.env": JSON.stringify({}),
-        "process.env.DEBUG": JSON.stringify(process.env.DEBUG),
+        'process.env': JSON.stringify({}),
+        'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
     },
-
-    plugins: [
-        nodePolyfills({protocolImports: false}),
-        AutoImport({
-            dirs: ['./composables', './store/**/index.ts'],
-            imports: ['vue', '@vueuse/core']
-        })
-    ],
+    plugins: [tsconfigPaths(), nodePolyfills({ protocolImports: true })],
 
     build: {
-        sourcemap: false,
+        // sourcemap: buildSourceMap, 
 
         rollupOptions: {
             cache: false,
             output: {
                 manualChunks: (id: string) => {
-                    //
-                },
-            },
-        },
+                    if (id.includes('@keplr-wallet')) {
+                        return 'keplr'
+                    }
+                }
+            }
+        }
+    },
+
+    server: {
+        fs: {
+            allow: ['..']
+        }
     },
 
     optimizeDeps: {
-        exclude: ["fsevents"],
-    },
-}) as UserConfig;
+        exclude: ['fsevents']
+    }
+}) as ViteConfig
+
+export const vitePlugins = [{ src: './nuxt-config/buffer.ts', ssr: false }]

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {Modal, ModalState} from '~/types';
+import { Modal, type ModalState } from '~/types';
 
 const modalValues = Object.values(Modal)
 const modalExists = (modal: Modal) => modalValues.includes(modal)

@@ -61,32 +61,22 @@ const connect = handleSubmit(() => {
     <p class="text-sm font-semibold mb-2">
       Derivation Path
     </p>
-    <AppSelectField
-      v-model="wallet"
-      :options="options"
-      placeholder="Wallet"
-    />
+    <AppSelectField v-model="wallet" :options="options" placeholder="Wallet" />
 
-    <p
-      v-if="fetchStatus.isLoading()"
-      class="text-gray-400 text-xs my-2 flex items-center gap-2"
-    >
+    <p v-if="fetchStatus.isLoading()" class="text-gray-400 text-xs my-2 flex items-center gap-2">
       <AppSpinner is-sm />
       <span>
         We are getting your addresses, please wait ...
       </span>
     </p>
 
-    <div
-      v-else
-      class="flex items-center gap-1 text-blue-500 hover:text-opacity-80 cursor-pointer text-sm mt-2"
-      @click="fetchAddresses"
-    >
+    <div v-else class="flex items-center gap-1 text-blue-500 hover:text-opacity-80 cursor-pointer text-sm mt-2"
+      @click="fetchAddresses">
       <span>
         {{
           walletStore.addresses.length === 0
-              ? 'Get addresses'
-              : 'Get more addresses'
+          ? 'Get addresses'
+          : 'Get more addresses'
         }}
       </span>
       <BaseIcon name="arrow" class="rotate-180 w-4 h-4" />
@@ -99,32 +89,18 @@ const connect = handleSubmit(() => {
         Address
       </p>
 
-      <AppSelectField
-        v-model="address"
-        is-searchable
-        :options="
-          walletStore.addresses.map((address: string) => ({
-            display: address,
-            value: address
-          }))
-        "
-        placeholder="Select address to connect"
-      />
+      <AppSelectField v-model="address" is-searchable :options="walletStore.addresses.map((address: string) => ({
+        display: address,
+        value: address
+      }))
+        " placeholder="Select address to connect" />
 
-      <p
-        v-if="addressErrors.length > 0"
-        class="text-red-500 text-sm capitalize-phrase mt-1"
-      >
+      <p v-if="addressErrors.length > 0" class="text-red-500 text-sm capitalize-phrase mt-1">
         {{ addressErrors[0] }}
       </p>
 
-      <AppButton
-        class="w-full mt-4 text-blue-900 bg-blue-500 font-semibold"
-        :is-disabled="addressErrors.length > 0"
-        :is-loading="status.isLoading()"
-        is-lg
-        @click="connect"
-      >
+      <AppButton class="w-full mt-4 text-blue-900 bg-blue-500 font-semibold" :is-disabled="addressErrors.length > 0"
+        :is-loading="status.isLoading()" is-lg @click="connect">
         Connect
       </AppButton>
     </div>

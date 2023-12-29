@@ -7,10 +7,7 @@
       Tier
     </span>
 
-    <NuxtLink
-      :to="{ name: 'index' }"
-      class="text-green-500 hover:opacity-80 flex items-center gap-2"
-    >
+    <NuxtLink :to="{ name: 'index' }" class="text-green-500 hover:opacity-80 flex items-center gap-2">
       <span>
         No Tier Level
       </span>

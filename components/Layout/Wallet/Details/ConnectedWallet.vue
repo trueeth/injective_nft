@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { formatWalletAddress } from '@injectivelabs/utils'
 import { Wallet } from '@injectivelabs/wallet-ts'
-import type {PropType} from "@vue/runtime-core";
-import {Modal} from "~/types";
+import type { PropType } from "@vue/runtime-core";
+import { Modal } from "~/types";
 
 const walletStore = useWalletStore()
 const { copy } = useClipboard()
@@ -37,7 +37,7 @@ function onCopyAddress() {
 
 function onCopyInjectiveAddress() {
   copy(walletStore.injectiveAddress)
-  success({ title:'Copied address to your clipboard !'})
+  success({ title: 'Copied address to your clipboard !' })
 }
 
 function openQrCodeModal() {
@@ -55,33 +55,16 @@ function openQrCodeModal() {
         </p>
       </div>
       <div class="flex items-center gap-2">
-        <AssetQRCode
-          class="hover:text-blue-500 h-4 w-4"
-          @click="openQrCodeModal"
-        />
+        <AssetQRCode class="hover:text-blue-500 h-4 w-4" @click="openQrCodeModal" />
 
-        <BaseIcon
-          name="copy-filled"
-          class="hover:text-blue-500 h-4 w-4"
-          @click.stop="onCopyInjectiveAddress"
-        />
+        <BaseIcon name="copy-filled" class="hover:text-blue-500 h-4 w-4" @click.stop="onCopyInjectiveAddress" />
 
-        <BaseIcon
-          name="caret-down"
-          class="h-6 w-6 transition duration-500 hover:text-blue-500"
-          :class="{ '-rotate-180': isDropdownVisible }"
-          @click="onToggleDropdown"
-        />
+        <BaseIcon name="caret-down" class="h-6 w-6 transition duration-500 hover:text-blue-500"
+          :class="{ '-rotate-180': isDropdownVisible }" @click="onToggleDropdown" />
       </div>
     </div>
-    <transition
-      enter-active-class="ease-out duration-300"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="ease-in duration-200"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
+    <transition enter-active-class="ease-out duration-300" enter-from-class="opacity-0" enter-to-class="opacity-100"
+      leave-active-class="ease-in duration-200" leave-from-class="opacity-100" leave-to-class="opacity-0">
       <div v-if="isDropdownVisible" class="ml-8 mt-4 flex flex-col gap-y-2">
         <div class="flex items-center justify-between text-xs">
           <span class="font-semibold">
@@ -90,16 +73,10 @@ function openQrCodeModal() {
 
           <div class="flex items-center gap-2">
             <span>{{ formattedAddress }}</span>
-            <BaseIcon
-              name="copy-filled"
-              class="hover:text-blue-500 h-4 w-4"
-              @click="onCopyAddress"
-            />
+            <BaseIcon name="copy-filled" class="hover:text-blue-500 h-4 w-4" @click="onCopyAddress" />
           </div>
         </div>
-        <LayoutWalletDetailsTierLevel
-          v-if="!walletStore.isAuthzWalletConnected"
-        />
+        <LayoutWalletDetailsTierLevel v-if="!walletStore.isAuthzWalletConnected" />
       </div>
     </transition>
   </div>

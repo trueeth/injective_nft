@@ -106,21 +106,13 @@ export default {
         </div>
       </div>
       <div :class="wrapperClass" class="overflow-hidden">
-        <div
-          class="flex items-center justify-between no-shadow"
-          :class="{ 'bg-gray-700': isDisabled && isDisabledGray }"
-        >
+        <div class="flex items-center justify-between no-shadow" :class="{ 'bg-gray-700': isDisabled && isDisabledGray }">
           <div v-if="slots.prefix" class="ml-3">
             <slot name="prefix" />
           </div>
 
-          <BaseNumericInput
-            v-bind="$attrs"
-            :class="inputClass"
-            class="input"
-            :disabled="isDisabled"
-            @input:blurred="onBlur"
-          >
+          <BaseNumericInput v-bind="$attrs" :class="inputClass" class="input" :disabled="isDisabled"
+            @input:blurred="onBlur">
             />
 
             <div v-if="slots.max" class="mr-3">

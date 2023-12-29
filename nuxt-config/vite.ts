@@ -14,8 +14,7 @@ export default defineConfig({
     plugins: [tsconfigPaths(), nodePolyfills({ protocolImports: true })],
 
     build: {
-        // sourcemap: buildSourceMap, 
-
+        sourcemap: buildSourceMap,
         rollupOptions: {
             cache: false,
             output: {
@@ -25,7 +24,7 @@ export default defineConfig({
                     }
                 }
             }
-        }
+        },
     },
 
     server: {

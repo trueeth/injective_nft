@@ -24,10 +24,7 @@ export default defineNuxtConfig({
         dirs: ['composables/**', 'store/*.ts', 'store/**/index.ts']
     },
 
-    sourcemap: {
-        server: false,
-        client: false
-    },
+
 
     plugins: [...vitePlugins],
 

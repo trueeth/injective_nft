@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { chainGrpcWasmApi } from "@/app/services";
+import { chainGrpcWasmApi } from "~/app/service";
 import { COUNTER_CONTRACT_ADDRESS } from "@/app/utils/constants";
 import {
   toBase64,
@@ -7,7 +7,7 @@ import {
   MsgExecuteContractCompat,
 } from "@injectivelabs/sdk-ts";
 import { useWalletStore } from "./wallet";
-import { msgBroadcastClient } from "@/app/services";
+import { msgBroadcastClient } from "~/app/service";
 import { sleep } from "@injectivelabs/utils";
 import { backupPromiseCall } from "@/app/utils/index";
 

@@ -8,7 +8,8 @@ const buildSourceMap = process.env.BUILD_SOURCEMAP !== 'false'
 export default defineConfig({
     define: {
         'process.env': JSON.stringify({}),
-        'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
+        'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
+        global: {}
     },
     plugins: [tsconfigPaths(), nodePolyfills({ protocolImports: true })],
 
@@ -32,6 +33,8 @@ export default defineConfig({
             allow: ['..']
         }
     },
+
+
 
     optimizeDeps: {
         exclude: ['fsevents']

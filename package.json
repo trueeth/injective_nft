@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@bangjelkoski/vite-plugin-node-polyfills": "^0.0.2",
+    "@nuxt/typescript-build": "^3.0.2",
     "@nuxtjs/tailwindcss": "6.8.0",
     "autoprefixer": "latest",
     "node-stdlib-browser": "^1.2.0",

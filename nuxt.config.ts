@@ -26,7 +26,7 @@ export default defineNuxtConfig({
 
     sourcemap: {
         server: false,
-        client: true
+        client: false
     },
 
     plugins: [...vitePlugins],

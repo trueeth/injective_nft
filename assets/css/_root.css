@@ -1,0 +1,14 @@
+@-webkit-keyframes rotation {
+  0%, 30%   {-webkit-transform: scale(1);}
+  30%, 60% {-webkit-transform: scale(1.05);}
+  60%, 100% {-webkit-transform: scale(1);}
+}
+@keyframes rotation {
+  0%, 30%   {-webkit-transform: scale(1);}
+  30%, 60% {-webkit-transform: scale(1.05);}
+  60%, 100% {-webkit-transform: scale(1);}
+}
+img.nft {
+  -webkit-animation: rotation 6s infinite running;
+  animation: rotation 6s infinite running;
+}

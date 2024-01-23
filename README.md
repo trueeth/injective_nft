@@ -117,16 +117,16 @@ and calling `get_count` on the Smart Contract.
 ```js
 // store/counter.ts -> fetchCount()
 
-const counterStore = useCounterStore();
+const appStore = useAppStore();
 
       const response = (await chainGrpcWasmApi.fetchSmartContractState(
-        COUNTER_CONTRACT_ADDRESS, // The address of the contract
+        MINTING_CONTRACT_ADDRESS, // The address of the contract
         toBase64({ get_count: {} }) // We need to convert our query to Base64
       )) as { data: string };
 
       const { count } = fromBase64(response.data) as { count: number }; // we need to convert the response from Base64
 
-      counterStore.$patch({ count });
+      appStore.$patch({ count });
 ```
 
 ## 5. Modifying the State
@@ -147,7 +147,7 @@ Heres an example for both:
 ```js
 // store/counter.ts -> incrementCount()
 
-const counterStore = useCounterStore();
+const appStore = useAppStore();
 const walletStore = useWalletStore();
 
 if (!walletStore.injectiveAddress) {
@@ -157,7 +157,7 @@ if (!walletStore.injectiveAddress) {
 // Preparing the message
 
 const msg = MsgExecuteContractCompat.fromJSON({
-  contractAddress: COUNTER_CONTRACT_ADDRESS,
+  contractAddress: MINTING_CONTRACT_ADDRESS,
   sender: walletStore.injectiveAddress,
   msg: {
     increment: {},
@@ -174,13 +174,13 @@ await msgBroadcastClient.broadcast({
 // sleep and backupPromiseCall are helper functions for waiting some time before executing
 
 await sleep(3000);
-await backupPromiseCall(() => counterStore.fetchCount());
+await backupPromiseCall(() => appStore.fetchCount());
 ```
 
 ```js
 // store/counter.ts -> setCount()
 
-const counterStore = useCounterStore();
+const appStore = useAppStore();
 const walletStore = useWalletStore();
 
 if (!walletStore.injectiveAddress) {
@@ -190,7 +190,7 @@ if (!walletStore.injectiveAddress) {
 // Preparing the message
 
 const msg = MsgExecuteContractCompat.fromJSON({
-  contractAddress: COUNTER_CONTRACT_ADDRESS,
+  contractAddress: MINTING_CONTRACT_ADDRESS,
   sender: walletStore.injectiveAddress,
   msg: {
     reset: {
@@ -207,5 +207,5 @@ await msgBroadcastClient.broadcast({
 });
 
 await sleep(3000);
-await backupPromiseCall(() => counterStore.fetchCount());
+await backupPromiseCall(() => appStore.fetchCount());
 ```
